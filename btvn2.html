@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra chẵn lẻ</title>
+</head>
+
+<body>
+    <h2>Kết quả kiểm tra:</h2>
+    <p id="ketQua"></p>
+
+    <script>
+        const checkParity = (a) => {
+            const num = Number(a);
+            if (isNaN(num)) {
+                return `"${a}" is not a number.`;  
+            }
+            if (!Number.isInteger(num)) {
+                return `"${a}" is not an integer.`; 
+            }
+            return num % 2 === 0 ? `${num} is an even number.` : `${num} is an odd number.`; 
+        };
+
+    
+        const numbers = ['a', 10, 7];
+
+
+        const ketQuaElement = document.getElementById("ketQua");
+
+    
+        let result = '';
+        numbers.forEach(num => {
+            result += checkParity(num) + '<br>';
+        });
+
+        ketQuaElement.innerHTML = result;
+    </script>
+</body>
+</html>
