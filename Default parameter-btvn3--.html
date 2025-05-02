@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Người Dùng</title>
+    <style>
+        body {
+            font-family: monospace;
+            font-size: 18px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <pre id="output"></pre>
+
+    <script>
+        function createUser(name, age = 18, role = "user") {
+            return { name, age, role };
+        }
+
+    
+        const user1 = createUser("Dev");
+        const user2 = createUser("Nguyen Van A", 20, "Admin");
+
+        
+        const formattedOutput = 
+            `{ name: ${user1.name}, age: ${user1.age}, role: "${user1.role}" }\n` +
+            `{ name: ${user2.name}, age: ${user2.age}, role: "${user2.role}" }`;
+
+        document.getElementById("output").textContent = formattedOutput;
+    </script>
+
+</body>
+</html>
