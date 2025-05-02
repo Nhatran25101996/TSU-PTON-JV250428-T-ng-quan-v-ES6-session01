@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Even Odd Summary</title>
+  <style>
+    body {
+      font-family: monospace;
+      font-size: 18px;
+      padding: 40px;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="output"></div>
+
+  <script>
+    function evenOdd(...numbers) {
+      const even = numbers.filter(n => n % 2 === 0);
+      const odd = numbers.filter(n => n % 2 !== 0);
+
+      const sumEven = even.reduce((a, b) => a + b, 0);
+      const sumOdd = odd.reduce((a, b) => a + b, 0);
+
+      const evenStr = `{ Even : ${even.join(' , ')} . SumEven = ${sumEven} },`;
+      const oddStr = `{ Odd: ${odd.join(' , ')} . SumOdd = ${sumOdd} },`;
+
+      return `${evenStr}\n\n${oddStr}\n`;
+    }
+
+    const result =
+      evenOdd(1, 2, 3, 4, 5) + '\n' +
+      evenOdd(1, 2, 3, 4) + '\n' +
+      evenOdd(1, 2, 3);
+
+    document.getElementById("output").textContent = result;
+  </script>
+
+</body>
+</html>
