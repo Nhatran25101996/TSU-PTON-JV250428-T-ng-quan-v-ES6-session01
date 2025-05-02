@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You Letter</title>
+  <style>
+    body {
+      font-family: monospace;
+      font-size: 18px;
+      padding: 40px;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="output"></div>
+
+  <script>
+    function sendThankYouLetter() {
+      return `
+Dear [name], 
+Thank you for purchasing our product. We hope you enjoy it.
+Best regards,
+[Your Company Name]`;
+    }
+
+    // Gọi hàm để hiển thị mẫu thư
+    const result = sendThankYouLetter();
+    document.getElementById("output").textContent = result;
+  </script>
+
+</body>
+</html>
