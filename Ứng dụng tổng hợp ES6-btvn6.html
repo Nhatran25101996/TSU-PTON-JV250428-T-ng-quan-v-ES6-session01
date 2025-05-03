@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý học viên</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button { margin: 5px; padding: 5px; }
+    .student { margin: 10px 0; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Ứng dụng Quản lý Học viên</h1>
+
+  <div>
+    <h3>Thêm học viên mới</h3>
+    <input id="id" placeholder="ID">
+    <input id="name" placeholder="Tên">
+    <input id="age" placeholder="Tuổi">
+    <input id="email" placeholder="Email">
+    <button onclick="addStudent()">Thêm</button>
+  </div>
+
+  <div>
+    <h3>Tìm kiếm học viên</h3>
+    <input id="searchName" placeholder="Nhập tên">
+    <button onclick="searchByName()">Tìm</button>
+  </div>
+
+  <h3>Danh sách học viên</h3>
+  <div id="studentList"></div>
+
+  <script>
+    let students = [];
+
+    function displayStudents(list = students) {
+      const listDiv = document.getElementById('studentList');
+      listDiv.innerHTML = '';
+      if (list.length === 0) {
+        listDiv.innerHTML = '<p>Không có học viên nào.</p>';
+        return;
+      }
+      list.forEach(student => {
+        const div = document.createElement('div');
+        div.className = 'student';
+        div.innerHTML = `
+          <strong>${student.name}</strong> (ID: ${student.id})<br>
+          Tuổi: ${student.age} - Email: ${student.email}<br>
+          <button onclick="deleteStudent(${student.id})">Xóa</button>
+          <button onclick="editStudent(${student.id})">Sửa</button>
+        `;
+        listDiv.appendChild(div);
+      });
+    }
+
+    function addStudent() {
+      const id = +document.getElementById('id').value;
+      const name = document.getElementById('name').value;
+      const age = +document.getElementById('age').value;
+      const email = document.getElementById('email').value;
+      if (!id || !name || !age || !email) return alert('Vui lòng nhập đầy đủ thông tin');
+      if (students.some(s => s.id === id)) return alert('ID đã tồn tại');
+      students.push({ id, name, age, email });
+      displayStudents();
+    }
+
+    function deleteStudent(id) {
+      students = students.filter(s => s.id !== id);
+      displayStudents();
+    }
+
+    function editStudent(id) {
+      const student = students.find(s => s.id === id);
+      const newName = prompt('Tên mới:', student.name);
+      const newAge = prompt('Tuổi mới:', student.age);
+      const newEmail = prompt('Email mới:', student.email);
+      if (newName) student.name = newName;
+      if (newAge) student.age = +newAge;
+      if (newEmail) student.email = newEmail;
+      displayStudents();
+    }
+
+    function searchByName() {
+      const name = document.getElementById('searchName').value.toLowerCase();
+      const result = students.filter(s => s.name.toLowerCase().includes(name));
+      displayStudents(result);
+    }
+  </script>
+</body>
+</html>
